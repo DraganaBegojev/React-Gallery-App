@@ -2,9 +2,9 @@ const Nav = () => {
   return (
     <nav className="main-nav">
       <ul>
-        <li><a href="#">Cats</a></li>
-        <li><a href="#">Dogs</a></li>
-        <li><a href="#">Computers</a></li>
+        <li><Navlink href="#">Cats</Navlink></li>
+        <li><Navlink href="#">Dogs</Navlink></li>
+        <li><Navlink href="#">Computers</Navlink></li>
       </ul>
     </nav>
   );
