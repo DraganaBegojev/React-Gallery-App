@@ -3,6 +3,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
+import { Routes, Route } from 'react-router-dom'
+
 import apiKey from './config'
 
 import Nav from './components/Nav'
@@ -16,9 +18,19 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className="container">
         <Search />
         <Nav />
+
+        <Routes>
+           <Route path="/" element={<Navigate to="/cats" />} />
+
+           <Route path="/cats" element={<PhotoList topic="cats" />} />
+            <Route path="/dogs" element={<PhotoList topic="dogs" />} />
+            <Route path="/computers" element={<PhotoList topic="computers" />} />
+
+            <Route path="/search/:query" element={<PhotoList />} />
+        </Routes>
       </div>
     </>
   )
