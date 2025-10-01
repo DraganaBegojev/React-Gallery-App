@@ -1,8 +1,8 @@
 // src/components/Photo.jsx
-const Photo = ({ src, alt }) => {
+const Photo = ({ photo }) => {
   return (
     <li>
-      <img src={src} alt={alt} />
+      <img src={photo.webformatURL} alt={photo.tags} />
     </li>
   );
 }
