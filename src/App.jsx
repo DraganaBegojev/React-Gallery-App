@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import './App.css'
 
@@ -18,26 +18,37 @@ function App() {
     search: []
   })
 
-  const fetchData = async (query, topic = 'search') => {
-    // fetch data from pixabay api
-    try {
-      const response = await fetch(`https://pixabay.com/api/?key=${apiKey}&q=${query}&image_type=photo&per_page=24`)
+  // loding state 
+  const [loading, setLoading] = useState(false);
+  const [currentSearchQuery, setCurrentSearchQuery] = useState('');
 
-      const data = await response.json()
-      setPhotos(prev => ({
-        ...prev,
-        [topic]: data.hits
-      }));
-    } catch (error) {
+  const fetchData = useCallback (async (query, topic = 'search') => {
+    // fetch data from pixabay api
+    setLoading(true);
+    try {
+        const response = await fetch(`https://pixabay.com/api/?key=${apiKey}&q=${query}&image_type=photo&per_page=24`)
+
+        const data = await response.json()
+        setPhotos(prev => ({
+          ...prev,
+          [topic]: data.hits
+        }));
+        if (topic === 'search') {
+          setCurrentSearchQuery(query);
+        }
+      } catch (error) {
       console.error('Error fetching data:', error)
+      } finally {
+      setLoading(false);
     }
-  }
+  }, [])
+
   useEffect(() => {
     // Fetch initial data for default topics
     fetchData('cats', 'cats')
     fetchData('dogs', 'dogs')
     fetchData('computers', 'computers')
-  }, [])
+  }, [fetchData])
 
   return (
     <>
@@ -52,7 +63,8 @@ function App() {
             <Route path="/dogs" element={<PhotoList photos={photos.dogs} topic="dogs" />} />
             <Route path="/computers" element={<PhotoList photos={photos.computers} topic="computers" />} />
 
-            <Route path="/search/:query" element={<PhotoList photos={photos.search} />} />
+            <Route path="/search/:query" 
+            element={<PhotoList photos={photos.search} fetchData={fetchData} />} />
         </Routes>
       </div>
     </>
