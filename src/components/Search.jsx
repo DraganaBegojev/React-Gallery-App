@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Search = () => {
+const Search = ({ fetchData }) => {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    fetchData(query, 'search');
     navigate(`/search/${query}`);
   };
 
