@@ -21,7 +21,7 @@ function App() {
 
   // loding state 
   const [loading, setLoading] = useState(false);
-  const [currentSearchQuery, setCurrentSearchQuery] = useState('');
+
 
   const fetchData = useCallback (async (query, topic = 'search') => {
     // fetch data from pixabay api
@@ -34,9 +34,6 @@ function App() {
           ...prev,
           [topic]: data.hits
         }));
-        if (topic === 'search') {
-          setCurrentSearchQuery(query);
-        }
       } catch (error) {
       console.error('Error fetching data:', error)
       } finally {
