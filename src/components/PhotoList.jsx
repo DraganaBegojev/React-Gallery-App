@@ -14,7 +14,15 @@ const PhotoList = ({ photos, fetchData, topic }) => {
 
   return (
     <div className="photo-container">
-      <h2>{query ? `Results for "${query}"` : topic}</h2>
+     <h2> {photos.length > 0 
+     ? query 
+      ? `Results for "${query}"` 
+      : topic 
+    : query
+    ? `No results for "${query}"`
+    : `No results for "${topic}"`}
+</h2>
+
       <ul>
         {photos.length > 0 ? (
           photos.map((photo) => (
