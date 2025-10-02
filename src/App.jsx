@@ -57,6 +57,12 @@ function App() {
         <Search fetchData={fetchData}/>
         <Nav />
 
+        {loading && (
+          <div className="loading">
+            <div className="spinner"></div>
+          </div>
+        )}
+
         <Routes>
            <Route path="/" element={<Navigate to="/cats" />} />
 
