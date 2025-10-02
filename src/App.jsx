@@ -10,6 +10,7 @@ import Search from './components/Search'
 
 
 function App() {
+  // State to hold photos for different topics
   const [photos, setPhotos] = useState({
     cats: [],
     dogs: [],
@@ -18,6 +19,7 @@ function App() {
   })
 
   const fetchData = async (query, topic = 'search') => {
+    // fetch data from pixabay api
     try {
       const response = await fetch(`https://pixabay.com/api/?key=${apiKey}&q=${query}&image_type=photo&per_page=24`)
 
@@ -31,6 +33,7 @@ function App() {
     }
   }
   useEffect(() => {
+    // Fetch initial data for default topics
     fetchData('cats', 'cats')
     fetchData('dogs', 'dogs')
     fetchData('computers', 'computers')
