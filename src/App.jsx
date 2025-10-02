@@ -7,6 +7,7 @@ import apiKey from './config'
 import Nav from './components/Nav'
 import PhotoList from './components/PhotoList'
 import Search from './components/Search'
+import NotFound from './components/NotFound'
 
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
 
             <Route path="/search/:query" 
             element={<PhotoList photos={photos.search} fetchData={fetchData} />} />
+            <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </>
