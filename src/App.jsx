@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import './App.css'
 
-import apiKey from './config'
+const apiKey = import.meta.env.VITE_PIXABAY_KEY;
 
 import Nav from './components/Nav'
 import PhotoList from './components/PhotoList'
